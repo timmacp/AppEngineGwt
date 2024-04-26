@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>sample</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>sample-jettyMain</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <!-- Embedded Jetty dependencies -->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId> <!-- transitively pulls org.eclipse.jetty.toolchain:jetty-jakarta-servlet-api:5.0.2 -->
+      <version>${jetty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>${jetty.version}</version>
+      <type>jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>  <!-- transitively pulls logback-core and slf4j-api -->
+      <version>1.4.14</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>call-main</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>${mvnexec.version}</version>
+            <configuration>
+              <mainClass>com.example.Main</mainClass>
+              <arguments>
+                <argument>${basedir}/../sample-server/target/sample-server-1.0-SNAPSHOT.war</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

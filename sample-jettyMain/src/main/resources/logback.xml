@@ -1,0 +1,14 @@
+<!-- see https://logback.qos.ch/documentation.html &  https://stackify.com/logging-logback/ (untested( -->
+<configuration scan="true" debug="true"> <!-- dev:scan and reload this file every minute (not working!) & view configuration log -->
+<!-- scan is at JettyMain/target/classes/logback.xml, no such folder (dkdc) -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	<root level="info"><!-- default is debug  -->
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
