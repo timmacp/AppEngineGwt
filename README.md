@@ -25,11 +25,11 @@ http://localhost:8080/
 
 mvn package -P WAR  
 mvn exec:java -pl *-jettyMain -P call-main  
-mvn appengine:deploy -pl *-server  
+mvn appengine:deploy -pl *-server -P gae-deploy
 
 ### Jetty Maven plugin without codeserver
 mvn package -pl *-client -am  
-mvn jetty:run -pl *-server -am
+mvn jetty:run -pl *-server -am  
 
 ### Eclipse debugging
 mvn gwt:codeserver -pl *-client -am 
